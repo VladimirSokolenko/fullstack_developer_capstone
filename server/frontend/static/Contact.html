@@ -1,10 +1,37 @@
+<!DOCTYPE html>
 <html>
 <head>
   <!-- Link the style sheet here -->
   <link rel="stylesheet" href="/static/style.css">
   <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <style>
+    .card-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 5%;
+      position: relative;
+    }
+    .card {
+      flex: 1;
+      padding: 0;
+      box-shadow: none;
+    }
+    .vertical-line {
+      position: absolute;
+      height: 100%;
+      width: 2px;
+      background-color: #ddd;
+      top: 0;
+      right: 50%;
+      transform: translateX(50%);
+    }
+    .card-body-content {
+      padding: 20px;
+    }
+  </style>
 </head>
-<div>
+<body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
         <div class="container-fluid">
             <h2 style="padding-right: 5%;">Dealerships</h2>
@@ -27,37 +54,38 @@
         </div>
     </nav>
   
-    <div class="card border-0" style="width: 100%;margin: auto; margin-top:5%;">
+    <div class="card border-0" style="width: 90%;">
       
         <!-- Contacts header image -->
-        <div class="card" style="width: 80%;margin-top: 50px;align-self: center;">
+        <div class="card" style="width: 80%; margin-top: 50px; align-self: center;">
             <img src="/static/cars.png" class="card-img-top" alt="...">    
         </div>
 
         <hr>
-                
-
+        
         <!-- Contacts bottom image and contacts -->
-        <div style="display: flex;flex-direction: row; margin:auto">
-            <div class="card border-0" style="width: 50%;">
-                <img class="card-body" src="/static/contactus.png" alt="Card image">
+        <div class="card-container">
+            <div class="card border-0">
+                <img class="card-body-content" src="/static/contactus.png" alt="Card image">
             </div>
 
-            <div class="card border-0" style="width: 50%;">
-                <div class="card-body text-primary">
-                    <h3><b> Contact customer service</b> <br>
-                    <a href= "mailto: support@bestcars.com"> support@bestcars.com </a> <br>
-                    <b> Contact our National Advertising Team</b>
-                    <a href= "mailto: NationalSales@bestcars.com"> NationalSales@bestcars.com </a>
-                    <b> Contact customer service</b> <br>
-                    <a href= "mailto: support@bestcars.com"> support@bestcars.com </a> <br>
-                    <b> Contact customer service</b> <br>
-                    <a href= "mailto: support@bestcars.com"> support@bestcars.com </a> <br>
-                    <b> Contact customer service</b> <br>
-                    <a href= "mailto: support@bestcars.com"> support@bestcars.com </a> </h3>
+            <div class="vertical-line"></div>
+
+            <div class="card border-0">
+                <div class="card-body text-primary card-body-content" style="align-self: center;">
+                    <h3><b style="align-self: center;"> Contact customer service</b> <br>
+                    <a href="mailto:support@bestcars.com">support@bestcars.com</a> <br>
+                    <b> Contact our National Advertising Team</b> <br>
+                    <a href="mailto:NationalSales@bestcars.com">NationalSales@bestcars.com</a> <br>
+                    <b> Contact our Public Relations Team</b> <br>
+                    <a href="mailto:PR@bestcars.com">PR@bestcars.com</a> <br>
+                    <b> Contact the <a href="bestcars.com">bestcars.com</a> offices </b> <br>
+                    <a href="tel:3126111111">312-611-1111</a> <br>
+                    <b> Become a <a href="bestcars.com">bestcars.com</a> dealer </b> <br>
+                    <b> Visit <a href="growwithbestcars.com">growwithbestcars.com</a></b> <br></h3>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</body>
 </html>
