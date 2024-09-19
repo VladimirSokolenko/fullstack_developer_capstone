@@ -2,8 +2,10 @@
 ## Setup
 Environment
 ```cd .\server\
+pip install virtualenv
 virtualenv djangoenv
-.\djangoenv\Scripts\Activate 
+.\djangoenv\Scripts\Activate  # for windows
+source djangoenv/bin/activate # for Linux
 pip install -U -r requirements.txt
 ```
 
