@@ -12,11 +12,12 @@ def initiate():
     cntr_makes = 0
     car_make_instances = []
     for data in car_make_data:
-      car_make_instances.append(CarMake.objects.create(
-                                name=data['name'], description=data['description']))
-      cntr_makes+=1
-      print(f'{cntr_makes} records added to CarMake base')
-      
+        car_make_instances.append(CarMake.objects.create(
+                                  name=data['name'],
+                                  description=data['description']))
+        cntr_makes += 1
+        print(f'{cntr_makes} records added to CarMake base')
+
     # Create CarModel instances with the corresponding CarMake instances
     car_model_data = [
         {"name": "Pathfinder", "type": "SUV", "year": 2023,
@@ -49,13 +50,13 @@ def initiate():
          "car_make": car_make_instances[4]},
         {"name": "Kluger", "type": "SUV", "year": 2023,
          "car_make": car_make_instances[4]},
-      # Add more CarModel instances as needed
+        # Add more CarModel instances as needed
     ]
 
     cntr_models = 0
     for data in car_model_data:
         print(f'CarModel. Adding record {cntr_models}')
-        CarModel.objects.create(name=data['name'], car_make=data['car_make'], 
+        CarModel.objects.create(name=data['name'], car_make=data['car_make'],
                                 type=data['type'], year=data['year'])
         print(f'CarModel. Added record {cntr_models}')
         cntr_models += 1
