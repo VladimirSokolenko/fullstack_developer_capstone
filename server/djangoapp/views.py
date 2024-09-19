@@ -120,14 +120,16 @@ def get_dealer_details(request, dealer_id):
 def get_dealer_reviews(request,dealer_id):
     if(dealer_id):
         # If dealer ID requested
-        print (f'Check reviews of dealer with ID: {dealer_id}')
+        # print (f'Check reviews of dealer with ID: {dealer_id}')
         endpoint = "/fetchReviews/dealer/" + str(dealer_id)
-        print(f'Endpoint: {endpoint}')
+        # print(f'Endpoint: {endpoint}')
         reviews = get_request(endpoint)
+        # print(f'Reviews: {reviews}')
         for review_details in reviews:
-            review_text = review_details["review"]
-            print (f'Review text: {review_text}')
+            review_text = review_details['review']
+            # print (f'Review text: {review_text}')
             response = analyze_review_sentiments(review_text)
+            # print (f'Sentiment response: {response}')
             review_details['sentiment'] = response['sentiment']
         return JsonResponse({"status":200,"reviews":reviews})    
     else:
@@ -135,9 +137,11 @@ def get_dealer_reviews(request,dealer_id):
 
 # Create a `add_review` view to submit a review
 def add_review(request):
+    # print('entered add_review')
     if(request.user.is_anonymous == False):
         data = json.loads(request.body)
         try:
+            # print(f'data: {data}')
             response = post_review(data)
             return JsonResponse({"status":200})
         except:
