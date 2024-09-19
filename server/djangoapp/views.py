@@ -16,7 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 
 from .models import CarMake, CarModel
-
+from .restapis import get_request, analyze_review_sentiments, post_review
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -80,7 +80,6 @@ def registration(request):
     #Redirect to list page
     return JsonResponse(data)
 
-# @csrf_exempt
 def get_cars(request):
     count = CarMake.objects.filter().count()
     print(f'{count} records in CarMake found')
@@ -97,17 +96,52 @@ def get_cars(request):
 
 # # Update the `get_dealerships` view to render the index page with
 # a list of dealerships
-# def get_dealerships(request):
-# ...
-
-# Create a `get_dealer_reviews` view to render the reviews of a dealer
-# def get_dealer_reviews(request,dealer_id):
-# ...
+#Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
+def get_dealerships(request, state="All"):
+    if(state == "All"):
+        endpoint = "/fetchDealers"
+    else:
+        endpoint = "/fetchDealers/"+state
+    print(f'Endpoind: {endpoint}')
+    dealerships = get_request(endpoint)
+    return JsonResponse({"status":200,"dealers":dealerships})   
 
 # Create a `get_dealer_details` view to render the dealer details
-# def get_dealer_details(request, dealer_id):
-# ...
+def get_dealer_details(request, dealer_id):
+    if(dealer_id):
+        # If dealer ID requested
+        endpoint = "/fetchDealer/" + str(dealer_id)
+        dealership = get_request(endpoint)
+        return JsonResponse({"status":200,"dealer":dealership})    
+    else:
+        return JsonResponse({"status":400, "message":"Bad request"})
+    
+# Create a `get_dealer_reviews` view to render the reviews of a dealer
+def get_dealer_reviews(request,dealer_id):
+    if(dealer_id):
+        # If dealer ID requested
+        print (f'Check reviews of dealer with ID: {dealer_id}')
+        endpoint = "/fetchReviews/dealer/" + str(dealer_id)
+        print(f'Endpoint: {endpoint}')
+        reviews = get_request(endpoint)
+        for review_details in reviews:
+            review_text = review_details["review"]
+            print (f'Review text: {review_text}')
+            response = analyze_review_sentiments(review_text)
+            review_details['sentiment'] = response['sentiment']
+        return JsonResponse({"status":200,"reviews":reviews})    
+    else:
+        return JsonResponse({"status":400, "message":"Bad request"})
 
 # Create a `add_review` view to submit a review
-# def add_review(request):
-# ...
+def add_review(request):
+    if(request.user.is_anonymous == False):
+        data = json.loads(request.body)
+        try:
+            response = post_review(data)
+            return JsonResponse({"status":200})
+        except:
+            return JsonResponse({"status":401,"message":"Error in posting review"})
+    else:
+        return JsonResponse({"status":403,"message":"Unauthorized"})
+

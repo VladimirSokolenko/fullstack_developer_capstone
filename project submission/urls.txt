@@ -1,2 +1,7 @@
 Repo: https://github.com/VladimirSokolenko/fullstack_developer_capstone
 
+backend URL:
+https://vladimirsoko-3030.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai
+
+sentiment analyzer URL:
+https://sentianalyzer.1lzncoiopvwf.us-south.codeengine.appdomain.cloud
