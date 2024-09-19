@@ -1,7 +1,5 @@
 Repo: https://github.com/VladimirSokolenko/fullstack_developer_capstone
 
-Repo: https://github.com/VladimirSokolenko/fullstack_developer_capstone
-
 backend URL:
 https://vladimirsoko-3030.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai
 

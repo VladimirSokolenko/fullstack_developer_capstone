@@ -102,23 +102,9 @@ def get_dealerships(request, state="All"):
         endpoint = "/fetchDealers"
     else:
         endpoint = "/fetchDealers/"+state
+    print(f'Endpoind: {endpoint}')
     dealerships = get_request(endpoint)
-    return JsonResponse({"status":200,"dealers":dealerships})
-
-# Create a `get_dealer_reviews` view to render the reviews of a dealer
-def get_dealer_reviews(request,dealer_id):
-    if(dealer_id):
-        # If dealer ID requested
-        endpoint = "/fetchReviews/dealer/" + str(dealer_id)
-        reviews = get_request(endpoint)
-        for review_details in reviews:
-            review_text = review_details["review"]
-            response = analyze_review_sentiments(review_text)
-            review_details['sentiment'] = response['sentiment']
-        return JsonResponse({"status":200,"reviews":reviews})    
-    else:
-        return JsonResponse({"status":400, "message":"Bad request"})
-    
+    return JsonResponse({"status":200,"dealers":dealerships})   
 
 # Create a `get_dealer_details` view to render the dealer details
 def get_dealer_details(request, dealer_id):
@@ -126,10 +112,26 @@ def get_dealer_details(request, dealer_id):
         # If dealer ID requested
         endpoint = "/fetchDealer/" + str(dealer_id)
         dealership = get_request(endpoint)
-        return JsonResponse({"status":200,"dealer":dealerships})    
+        return JsonResponse({"status":200,"dealer":dealership})    
     else:
         return JsonResponse({"status":400, "message":"Bad request"})
     
+# Create a `get_dealer_reviews` view to render the reviews of a dealer
+def get_dealer_reviews(request,dealer_id):
+    if(dealer_id):
+        # If dealer ID requested
+        print (f'Check reviews of dealer with ID: {dealer_id}')
+        endpoint = "/fetchReviews/dealer/" + str(dealer_id)
+        print(f'Endpoint: {endpoint}')
+        reviews = get_request(endpoint)
+        for review_details in reviews:
+            review_text = review_details["review"]
+            print (f'Review text: {review_text}')
+            response = analyze_review_sentiments(review_text)
+            review_details['sentiment'] = response['sentiment']
+        return JsonResponse({"status":200,"reviews":reviews})    
+    else:
+        return JsonResponse({"status":400, "message":"Bad request"})
 
 # Create a `add_review` view to submit a review
 def add_review(request):
