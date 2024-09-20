@@ -31,8 +31,10 @@ def login_user(request):
     data = json.loads(request.body)
     username = data['userName']
     password = data['password']
+    # print(f'loging user: {data}')
     # Try to check if provide credential can be authenticated
     user = authenticate(username=username, password=password)
+    # print(f'login result: {user}')
     data = {"userName": username}
     if user is not None:
         # If user is valid, call login method to login current user
