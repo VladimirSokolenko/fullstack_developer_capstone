@@ -61,3 +61,4 @@ ibmcloud ce app list
 ```
 git config --global user.email "vladimir.sokolenko@gmail.com" 
 git config --global user.name "Vladimir Sokolenko"
+```
