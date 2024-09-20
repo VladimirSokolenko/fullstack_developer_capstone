@@ -55,10 +55,3 @@ check list of running applications
 ```
 ibmcloud ce app list
 ```
-
-## Git setup
-
-```
-git config --global user.email "vladimir.sokolenko@gmail.com" 
-git config --global user.name "Vladimir Sokolenko"
-```
