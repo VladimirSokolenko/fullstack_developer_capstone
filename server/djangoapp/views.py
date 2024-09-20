@@ -87,6 +87,7 @@ def registration(request):
 
 
 def get_cars(request):
+    print('Entered get_cars')
     count = CarMake.objects.filter().count()
     print(f'{count} records in CarMake found')
     if (count == 0):
